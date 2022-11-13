@@ -11,7 +11,7 @@ export default function App() {
       }}*/}
       <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" backgroundColor='#ff0000' />
-      <Text>Test Text</Text>
+      <Text>Hier entsteht eine Campus Ralley App der DHBW Lörrach</Text>
     </View>
   );
 }
