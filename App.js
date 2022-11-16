@@ -42,7 +42,13 @@ const PrivacyScreen = ({navigation}) => {
         <Button 
           title='Bestätigen' 
           color='red' 
-          onPress={() => navigation.navigate('DHBW Campus Ralley')} /* navigation function of NavigarionContainer in App()*/
+          onPress={() => {
+            if(isEnabled===true){
+              navigation.navigate('DHBW Campus Ralley');
+            } else {
+              /* Fehlermeldung, dass akzeptiert werden muss */
+            }
+          }} /* navigation function of NavigarionContainer in App()*/
         />
       </View>
     </View>
