@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
+/* main App; uses the defined pages and navigates between them */
 export default function App() {
   return (
     <NavigationContainer>
@@ -16,17 +17,20 @@ export default function App() {
   );
 }
 
+/*-----------------------------------------------pages----------------------------------------------- */
+/* outsource pages to seperate files/component files */
 
-/* Seiten irgendwann ggf. auslagern in separate Dateien/Komponenten */
+/* page vor simple privacy agreement */
 const PrivacyScreen = ({navigation}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
   return (
-    <View style={styles.container}>
+    /* View is a Container vor content. Only one View per "return"/page available, but it's possible to use multiple Views in that View as children.*/
+    <View style={styles.container}> 
       <View style={styles.contentView}>
         <Text style={styles.ownText}>Hiermit akzeptiere ich, dass Bildmaterial von mir gespeichert und auch bei der Ergebnisrunde gezeigt werden darf (oder so ähnlich)</Text>
-        <View style = {styles.radiocontainer}>
+        <View style = {styles.switchcontainer}>
           <Switch
             trackColor={{ false: "grey", true: "red" }} 
             onValueChange={toggleSwitch} 
@@ -35,24 +39,28 @@ const PrivacyScreen = ({navigation}) => {
           />
           <Text style={styles.ownText}>Ich akzeptiere.</Text>
         </View>
-        <Button title='Bestätigen' color='red' onPress={() =>
-        navigation.navigate('DHBW Campus Ralley')
-      }/>
+        <Button 
+          title='Bestätigen' 
+          color='red' 
+          onPress={() => navigation.navigate('DHBW Campus Ralley')} /* navigation function of NavigarionContainer in App()*/
+        />
       </View>
     </View>
-    /* View ist ein Container, nur eine View in einer Komponente, aber mehrere Unterviews/Views in der View */
   );
 }
 
+/* main page for ralley */
 const RalleyScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text>Dies ist ein Test</Text>
     </View>
-    /* View ist ein Container, nur eine View in einer Komponente, aber mehrere Unterviews/Views in der View */
   );
 }
 
+/*-----------------------------------------------styles----------------------------------------------- */
+
+/* styles of different components, pages or areas. Similar to CSS, but not all props available*/
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -76,7 +84,7 @@ const styles = StyleSheet.create({
   
   },
 
-  radiocontainer:{
+  switchcontainer:{
     flexDirection: 'row',
     justifyContent: 'center',
   }
