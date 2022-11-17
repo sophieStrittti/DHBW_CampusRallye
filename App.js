@@ -25,6 +25,8 @@ const PrivacyScreen = ({navigation}) => {
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
+  const [shouldShow, setShouldShow] = useState(false);
+
   return (
     /* View is a Container vor content. Only one View per "return"/page available, but it's possible to use multiple Views in that View as children.*/
     <View style={styles.container}> 
@@ -39,16 +41,11 @@ const PrivacyScreen = ({navigation}) => {
           />
           <Text style={styles.ownText}>Ich akzeptiere.</Text>
         </View>
+        {shouldShow ? <Text style={styles.warningMessage}>Bitte akzeptieren</Text>:null}
         <Button 
           title='Bestätigen' 
           color='red' 
-          onPress={() => {
-            if(isEnabled===true){
-              navigation.navigate('DHBW Campus Ralley');
-            } else {
-              /* Fehlermeldung, dass akzeptiert werden muss */
-            }
-          }} /* navigation function of NavigarionContainer in App()*/
+          onPress={() => {isEnabled ? navigation.navigate('DHBW Campus Ralley') : setShouldShow(true)}} /* navigation function of NavigarionContainer in App()*/
         />
       </View>
     </View>
@@ -93,6 +90,11 @@ const styles = StyleSheet.create({
   switchcontainer:{
     flexDirection: 'row',
     justifyContent: 'center',
+  },
+
+  warningMessage: {
+    color: 'red',
+    fontSize: 20,
   }
 
 });
