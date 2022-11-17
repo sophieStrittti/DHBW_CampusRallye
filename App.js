@@ -48,6 +48,7 @@ const PrivacyScreen = ({navigation}) => {
           title='Bestätigen' 
           color='red' 
           onPress={() => {isEnabled ? navigation.navigate('DHBW Campus Ralley') : setShouldShow(true)}} /* navigation function of NavigarionContainer in App()*/
+          /* TO DO for later: save privacy agreement for user*/
         />
       </View>
     </View>
