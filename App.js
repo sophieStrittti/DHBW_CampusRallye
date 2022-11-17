@@ -10,8 +10,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Datenschutzabfrage" component={PrivacyScreen}/>
-        <Stack.Screen name="DHBW Campus Ralley" component={RalleyScreen} options={{ headerBackVisible: false}}/>
+        <Stack.Screen name="Datenschutzabfrage" component={PrivacyScreen} options={{ headerStyle: {backgroundColor: '#f4f3f4'}}}/>
+        <Stack.Screen name="DHBW Campus Ralley" component={RalleyScreen} options={{ headerBackVisible: false, headerStyle: {backgroundColor: '#f4f3f4'}}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -41,6 +41,8 @@ const PrivacyScreen = ({navigation}) => {
           />
           <Text style={styles.ownText}>Ich akzeptiere.</Text>
         </View>
+
+        {/* Text to show if switch disabled and button pressed */}
         {shouldShow ? <Text style={styles.warningMessage}>Bitte akzeptieren</Text>:null}
         <Button 
           title='Bestätigen' 
@@ -54,6 +56,15 @@ const PrivacyScreen = ({navigation}) => {
 
 /* main page for ralley */
 const RalleyScreen = ({navigation}) => {
+
+  /* Disables to go back to privacy agreement screen. RalleyScreen is now the home Screen. */
+  React.useEffect(() =>
+    navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault();
+    })
+  );
+
+  /* page content */
   return (
     <View style={styles.container}>
       <Text>Dies ist ein Test</Text>
