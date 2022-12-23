@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, Switch} from 'react-native';
+import { StyleSheet, Text, View, Button, Switch, TextInput } from 'react-native';
 import React,{ useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -11,9 +11,44 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Datenschutzabfrage" component={PrivacyScreen} options={{ headerStyle: {backgroundColor: '#f4f3f4'}}}/>
+        <Stack.Screen name="Willkommen" component={HomeScreen} options={{ headerBackVisible: false, headerStyle: {backgroundColor: '#f4f3f4'}}}/>
         <Stack.Screen name="DHBW Campus Ralley" component={RalleyScreen} options={{ headerBackVisible: false, headerStyle: {backgroundColor: '#f4f3f4'}}}/>
       </Stack.Navigator>
     </NavigationContainer>
+  );
+}
+
+/* home screen */
+const HomeScreen = ({navigation}) => {
+
+  /* Disables to go back to privacy agreement screen. RalleyScreen is now the home Screen. */
+  React.useEffect(() =>
+    navigation.addListener('beforeRemove', (e) => {
+      e.preventDefault();
+    })
+  );
+
+  /* page content -> TO DO: SAVE INPUT CONTENT*/
+  return (
+    <View style={styles.container}>
+      <Text style={styles.ownHeading}>Willkommen zur DHBW Campus Ralley!</Text>
+      <Text style={styles.ownText}>Bitte den Gruppennamen und die Teilnehmer eingeben.</Text>
+      <View style={styles.contentView}>
+        <Text>Gruppenname:</Text>
+        <TextInput style={styles.textInput}>bitte eingeben</TextInput>
+        <Text>Gruppenmitglied</Text>
+        <TextInput style={styles.textInput}>bitte eingeben</TextInput>
+        <Text>Gruppenmitglied</Text>
+        <TextInput style={styles.textInput}>bitte eingeben</TextInput>
+        <Text>Gruppenmitglied</Text>
+        <TextInput style={styles.textInput}>bitte eingeben</TextInput>
+      </View>
+      <Button  
+        title='Starten' 
+        color='red' 
+        onPress={() => {navigation.navigate('DHBW Campus Ralley')}}
+      />
+    </View>
   );
 }
 
@@ -47,7 +82,8 @@ const PrivacyScreen = ({navigation}) => {
         <Button 
           title='Bestätigen' 
           color='red' 
-          onPress={() => {isEnabled ? navigation.navigate('DHBW Campus Ralley') : setShouldShow(true)}} /* navigation function of NavigarionContainer in App()*/
+          onPress={() => {isEnabled ? navigation.navigate('Willkommen') : setShouldShow(true)}} /* navigation function of NavigarionContainer in App()*/
+          /* TO DO for later: save privacy agreement for user*/
         />
       </View>
     </View>
@@ -67,7 +103,7 @@ const RalleyScreen = ({navigation}) => {
   /* page content */
   return (
     <View style={styles.container}>
-      <Text>Dies ist ein Test</Text>
+      
     </View>
   );
 }
@@ -88,8 +124,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-evenly',
-    alignItems: 'stretch',
-    
   },
 
   ownText: {
@@ -106,6 +140,17 @@ const styles = StyleSheet.create({
   warningMessage: {
     color: 'red',
     fontSize: 20,
+  },
+
+  ownHeading: {
+    fontSize: 40,
+    color: 'grey',
+  },
+
+  textInput: {
+    borderColor: 'grey',
+    borderWidth: 2,
+    width: 300,
   }
 
 });
