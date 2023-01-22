@@ -44,23 +44,11 @@ export default function Navigator({navigation }) {
     );
   };
 
-  const tabBarIcon = (icon, size) => {
-    return (
-      <FontAwesomeIcon
-        icon={icon}
-        size={size}
-      />
-    );
-  };
-
   const tabsConfig = ({ route }) => ({
     headerShown: false,
     tabBarIcon: ({ color }) => {
       const routeName = route.name;
-      let iconName;
-      if (routeName === 'Ralley') iconName = 'rss-feed';
-      else if (routeName === 'Settings') iconName = 'school';
-    },
+    }
   });
 
   const Tab = createBottomTabNavigator();
@@ -71,28 +59,16 @@ export default function Navigator({navigation }) {
           name="Ralley"
           component={RalleyStack}
           options={{
-            tabBarLabel: () =>
-              tabBarLabel('DHBW', ),
-            tabBarLabelPosition: 'below-icon',
-            tabBarIcon: () => (
-              <MaterialIcon
-                name={'rss-feed'}
-                size={32}
-              />
-            ),
+            tabBarLabel: () => tabBarLabel('Ralley'),
+            tabBarIcon: () => <MaterialIcon name={'map'} size={32}/>,
           }}
         />
         <Tab.Screen
           name="Settings"
           component={SettingsStack}
           options={{
-            tabBarLabel: () =>
-              tabBarLabel('Vorlesungen'),
-            tabBarIcon: () =>
-              <MaterialIcon
-                name={'rss-feed'}
-                size={32}
-              />
+            tabBarLabel: () => tabBarLabel('Einstellungen'),
+            tabBarIcon: () => <MaterialIcon name={'settings'} size={32}/>
           }}
         />
       </Tab.Navigator>

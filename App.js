@@ -10,7 +10,6 @@ export default function App() {
   return (
     <View>
       <StatusBar />
-      <Text>This is a test text</Text>
       <Navigator />
     </View>
   );
