@@ -4,9 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
+import Color from './js/styles/Colors';
+
 
 import RalleyScreen from './js/pages/RalleyScreen';
 import SettingsScreen from './js/pages/SettingsScreen';
+import GroupScreen from './js/pages/GroupScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -22,14 +25,17 @@ export default function App() {
               iconName = 'map';
             } else if (route.name === 'Einstellungen') {
               iconName = 'settings';
+            } else if (route.name === 'Gruppe') {
+              iconName = 'people';
             }
 
             // You can return any component that you like here!
-            return <MaterialIcon name={iconName} size={size} color={color} />;
+            return <MaterialIcon name={iconName} size={size} color={focused ? Color.dhbwRed : Color.dhbwGray}/>;
           },
-          tabBarActiveTintColor: 'tomato',
-          tabBarInactiveTintColor: 'gray',
+          tabBarActiveTintColor: Color.dhbwRed,
+          tabBarInactiveTintColor: Color.dhbwGray,
         })}>
+        <Tab.Screen name="Gruppe" component={GroupScreen} options={{ headerStyle: {backgroundColor: '#f4f3f4'}}}/>
         <Tab.Screen name="DHBW Campus Ralley" component={RalleyScreen} options={{ headerStyle: {backgroundColor: '#f4f3f4'}}}/>
         <Tab.Screen name="Einstellungen" component={SettingsScreen} options={{ headerStyle: {backgroundColor: '#f4f3f4'}}}/>
       </Tab.Navigator>
