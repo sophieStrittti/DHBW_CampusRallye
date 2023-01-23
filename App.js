@@ -1,22 +1,26 @@
-import { StyleSheet, Text, View, Button, Switch, TextInput, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Button, Switch, TextInput } from 'react-native';
 import React,{ useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-import Navigator from './js/Navigator';
+import RalleyScreen from './js/pages/RalleyScreen';
+import SettingsScreen from './js/pages/SettingsScreen';
+
+const Tab = createBottomTabNavigator();
 
 /* main App; uses the defined pages and navigates between them */
 export default function App() {
   return (
-    <View>
-      <StatusBar />
-      <Navigator />
-    </View>
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Ralley" component={RalleyScreen} options={{ headerStyle: {backgroundColor: '#f4f3f4'}}}/>
+        <Tab.Screen name="Einstellungen" component={SettingsScreen} options={{ headerStyle: {backgroundColor: '#f4f3f4'}}}/>
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
 
-/* TO DO: outsource Styles in Styles folder */
 /*-----------------------------------------------styles----------------------------------------------- */
 
 /* styles of different components, pages or areas. Similar to CSS, but not all props available*/
