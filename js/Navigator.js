@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import RalleyScreen from './pages/RalleyScreen';
 import SettingsScreen from './pages/SettingsScreen';
 
+// not used at the moment because doesn't work
 export default function Navigator({navigation }) {
 
   const Stack = createNativeStackNavigator();
