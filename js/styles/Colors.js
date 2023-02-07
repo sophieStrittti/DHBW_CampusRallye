@@ -1,3 +1,5 @@
+// copied from https://github.com/DHBWLoerrach/CampusApp
+// TO DO: Which colors do we need?
 module.exports = {
     cellBorder: '#EEEEEE',
     veryLightGray: 'rgb(233,233,233)',
@@ -8,8 +10,8 @@ module.exports = {
     dhbwRedWebView: 'rgb(226,0,26)', // FIXME: needed by WebView
     lightText: '#7F91A7',
     link: '#E2001A',
-    icon: '#484848',
     text: '#2c2c2c',
+    tabHeader: '#ffffff',
     lightMode:{
       cellBorder: '#EEEEEE',
       dhbwGray: '#5C6971',

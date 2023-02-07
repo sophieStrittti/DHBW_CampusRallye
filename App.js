@@ -35,58 +35,10 @@ export default function App() {
           tabBarActiveTintColor: Color.dhbwRed,
           tabBarInactiveTintColor: Color.dhbwGray,
         })}>
-        <Tab.Screen name="Gruppe" component={GroupScreen} options={{ headerStyle: {backgroundColor: '#f4f3f4'}}}/>
-        <Tab.Screen name="DHBW Campus Ralley" component={RalleyScreen} options={{ headerStyle: {backgroundColor: '#f4f3f4'}}}/>
-        <Tab.Screen name="Einstellungen" component={SettingsScreen} options={{ headerStyle: {backgroundColor: '#f4f3f4'}}}/>
+        <Tab.Screen name="Gruppe" component={GroupScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+        <Tab.Screen name="DHBW Campus Ralley" component={RalleyScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+        <Tab.Screen name="Einstellungen" component={SettingsScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
       </Tab.Navigator>
     </NavigationContainer>
   );
 }
-
-
-/*-----------------------------------------------styles----------------------------------------------- */
-
-/* styles of different components, pages or areas. Similar to CSS, but not all props available*/
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  contentView: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
-  },
-
-  ownText: {
-    color: 'grey',
-    fontSize: 25,
-  
-  },
-
-  switchcontainer:{
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-
-  warningMessage: {
-    color: 'red',
-    fontSize: 20,
-  },
-
-  ownHeading: {
-    fontSize: 40,
-    color: 'grey',
-  },
-
-  textInput: {
-    borderColor: 'grey',
-    borderWidth: 2,
-    width: 300,
-  }
-
-});
