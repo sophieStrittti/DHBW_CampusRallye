@@ -26,11 +26,10 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Ralley" component={TabScreen} />
-        <Stack.Screen name="Einstellungen" component={SettingsScreen} />
-        <Stack.Screen name="Impressum" component={ImpressumScreen} />
-        <Stack.Screen name="Sprache" component={SpracheScreen} />
-        <Stack.Screen name="Informationen" component={InformationenScreen} />
+        <Stack.Screen name="Ralley" component={TabScreen} options={{headerShown: false}}/>
+        <Stack.Screen name="Impressum" component={ImpressumScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+        <Stack.Screen name="Sprache" component={SpracheScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+        <Stack.Screen name="Informationen" component={InformationenScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -38,27 +37,25 @@ export default function App() {
 
 function TabScreen() {
   return (
-    <NavigationContainer>
-      <Tab.Navigator screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+    <Tab.Navigator screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
 
-            if (route.name === 'DHBW Campus Ralley') {
-              iconName = 'map';
-            } else if (route.name === 'Einstellungen') {
-              iconName = 'settings';
-            } else if (route.name === 'Gruppe') {
-              iconName = 'people';
-            }
-            return <MaterialIcon name={iconName} size={size} color={focused ? Color.dhbwRed : Color.dhbwGray}/>;
-          },
-          tabBarActiveTintColor: Color.dhbwRed,
-          tabBarInactiveTintColor: Color.dhbwGray,
-        })}>
-        <Tab.Screen name="Gruppe" component={GroupScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
-        <Tab.Screen name="DHBW Campus Ralley" component={RalleyScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
-        <Tab.Screen name="Einstellungen" component={SettingsScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
-      </Tab.Navigator>
-    </NavigationContainer>
+          if (route.name === 'DHBW Campus Ralley') {
+            iconName = 'map';
+          } else if (route.name === 'Einstellungen') {
+            iconName = 'settings';
+          } else if (route.name === 'Gruppe') {
+            iconName = 'people';
+          }
+          return <MaterialIcon name={iconName} size={size} color={focused ? Color.dhbwRed : Color.dhbwGray}/>;
+        },
+        tabBarActiveTintColor: Color.dhbwRed,
+        tabBarInactiveTintColor: Color.dhbwGray,
+      })}>
+      <Tab.Screen name="Gruppe" component={GroupScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+      <Tab.Screen name="DHBW Campus Ralley" component={RalleyScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+      <Tab.Screen name="Einstellungen" component={SettingsScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+    </Tab.Navigator>
   );
 }
