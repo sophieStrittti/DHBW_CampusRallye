@@ -15,6 +15,10 @@ import GroupScreen from './js/pages/GroupScreen';
 import ImpressumScreen from './js/pages/ImpressumScreen';
 import SpracheScreen from './js/pages/SpracheScreen';
 import InformationenScreen from './js/pages/InformationenScreen';
+import QRCodeFragen from './js/questions/QRCodeFragen';
+import Wissensfragen from './js/questions/Wissensfragen';
+import BildFragen from './js/questions/BildFragen';
+import QRScan from './js/questions/QRScan';
 
 
 const Tab = createBottomTabNavigator();
@@ -30,6 +34,10 @@ export default function App() {
         <Stack.Screen name="Impressum" component={ImpressumScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
         <Stack.Screen name="Sprache" component={SpracheScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
         <Stack.Screen name="Informationen" component={InformationenScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+        <Stack.Screen name="Wissensfragen" component={Wissensfragen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+        <Stack.Screen name="QRCodeFragen" component={QRCodeFragen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+        <Stack.Screen name="BildFragen" component={BildFragen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+        <Stack.Screen name="QRScan" component={QRScan} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
