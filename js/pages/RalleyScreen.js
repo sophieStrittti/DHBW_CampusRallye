@@ -1,77 +1,54 @@
-import { StyleSheet, Text, View, Button, Switch, TextInput } from 'react-native';
-import React,{ useState, useEffect } from 'react';
-import MapView, {Marker} from 'react-native-maps';
-import * as Location from 'expo-location';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import React from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
+// ...
 
-/* main page for ralley */
-export default function RalleyScreen (){
+export default function RalleyScreen() {
+  const navigation = useNavigation();
 
-    /* Disables to go back to privacy agreement screen. RalleyScreen is now the home Screen. */
-  /*  React.useEffect(() =>
-      navigation.addListener('beforeRemove', (e) => {
-        e.preventDefault();
-      })
-    );*/
-    
-    const [location, setLocation] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
-  
-    useEffect(() => {
-      (async () => {
-        
-        let { status } = await Location.requestForegroundPermissionsAsync();
-        if (status !== 'granted') {
-          setErrorMsg('Permission to access location was denied');
-          return;
-        }
-  
-        let location = await Location.getCurrentPositionAsync({});
-        setLocation(location);
-      })();
-    }, []);
-  
-    let userlatitude = 0;
-    let userlongitude = 0;
-    if (errorMsg) {
-      console.log(errorMsg);
-    } else if (location) {
-      userlongitude = location.coords.longitude;
-      userlatitude = location.coords.latitude;
-    }
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.tile} onPress={() => navigation.navigate('Wissensfragen')}>
+        <Text style={styles.tileText}>Wissensfrage</Text>
+      </TouchableOpacity>
 
-    const userlocation = {
-      latitude: 47.61709224449131,
-      longitude: 7.678051759539827,
-    };
+      <TouchableOpacity style={styles.tile} onPress={() => navigation.navigate('QRCodeFragen')}>
+        <Text style={styles.tileText}>QRCodeFrage</Text>
+      </TouchableOpacity>
 
-    userlocation.latitude = userlatitude;
-    userlocation.longitude = userlongitude;
+      <TouchableOpacity style={styles.tile} onPress={() => navigation.navigate('BildFragen')}>
+        <Text style={styles.tileText}>BildFrage</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
 
-    const [mapRegion, setmapRegion] = useState({
-      latitude: 47.61709224449131, 
-      longitude: 7.678051759539827,
-      latitudeDelta: 0.0004,
-      longitudeDelta: 0.004,
-    }); 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 
-    /* page content */
-    return (      
-      <View>
-        <Text>This is the Ralley Screen</Text>
-        <Text>{userlongitude}</Text>
-        <MapView
-          style={{ alignSelf: 'stretch', height: '90%' }}
-          region={mapRegion}
-        >
-          <Marker coordinate={userlocation} >
-            <MaterialIcon name='gps-fixed' size={25}/>
-          </Marker>
-        </MapView>
-      </View>
-    );
-  }
+  tile: {
+    width: '80%',
+    height: 100,
+    marginVertical: 10,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'grey',
+  },
+
+  tileText: {
+    fontSize: 20,
+    color: 'grey',
+  },
+});
 
 
 
