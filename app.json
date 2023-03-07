@@ -30,6 +30,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
+
       "package": "com.sophie_stritti.blank",
       "versionCode": 1,
       "config":{
@@ -37,12 +38,14 @@
           "apiKey":"AIzaSyBHBWllknxsr0y6RrMLsBt9-D2EH3hIE9k"
         }
       }
+
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
+
         "projectId": "e84aa05a-7212-4936-9ba8-cc2276cb5697"
       }
     }
