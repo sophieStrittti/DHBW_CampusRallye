@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import {Linking, View, Text, StyleSheet } from 'react-native';
 import Colors from '../styles/Colors';
 
 export default function ImpressumScreen() {
@@ -95,18 +95,17 @@ export default function ImpressumScreen() {
       <View style={Styles.Texts.block}>
         <Text style={Styles.Texts.headline}>Quellcode</Text>
         <Text>
-          Der Quellcode dieser App wurde als Open Source Projekt unter
-          der 3-Klausel-BSD-Lizenz veröffentlicht:
+          Der Quellcode dieser App wurde als Open Source Projekt angelegt
         </Text>
         <Text
           style={{color: Colors.dhbwRed}}
           onPress={() =>
             Linking.openURL(
-              'https://github.com/DHBWLoerrach/CampusApp'
+              'https://github.com/sophieStrittti/DHBW_CampusRallyeApp'
             )
           }
         >
-          github.com/DHBWLoerrach/CampusApp
+          https://github.com/sophieStrittti/DHBW_CampusRallyeApp
         </Text>
       </View>
     </View>
