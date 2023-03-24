@@ -8,7 +8,6 @@ import { Screen } from 'react-native-screens';
 
 import Color from './js/styles/Colors';
 
-
 import RalleyScreen from './js/pages/RalleyScreen';
 import SettingsScreen from './js/pages/SettingsScreen';
 import GroupScreen from './js/pages/GroupScreen';
@@ -27,6 +26,7 @@ const Stack = createStackNavigator();
 
 /* main App; uses the defined pages and navigates between them */
 export default function App() {
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
