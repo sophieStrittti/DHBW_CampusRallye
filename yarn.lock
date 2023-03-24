@@ -4135,17 +4135,12 @@ expo-image-loader@~4.0.0:
   resolved "https://registry.yarnpkg.com/expo-image-loader/-/expo-image-loader-4.0.0.tgz#a17e5f95a4c1671791168dd5dfc221bf2f88480c"
   integrity sha512-hVMhXagsO1cSng5s70IEjuJAuHy2hX/inu5MM3T0ecJMf7L/7detKf22molQBRymerbk6Tzu+20h11eU0n/3jQ==
 
-expo-image-loader@~4.1.0:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/expo-image-loader/-/expo-image-loader-4.1.1.tgz#efadbb17de1861106864820194900f336dd641b6"
-  integrity sha512-ciEHVokU0f6w0eTxdRxLCio6tskMsjxWIoV92+/ZD37qePUJYMfEphPhu1sruyvMBNR8/j5iyOvPFVGTfO8oxA==
-
-expo-image-picker@^14.1.1:
-  version "14.1.1"
-  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-14.1.1.tgz#181f1348ba6a43df7b87cee4a601d45c79b7c2d7"
-  integrity sha512-SvWtnkLW7jp5Ntvk3lVcRQmhFYja8psmiR7O6P/+7S6f4llt3vaFwb4I3+pUXqJxxpi7BHc2+95qOLf0SFOIag==
+expo-image-picker@~14.0.2:
+  version "14.0.3"
+  resolved "https://registry.yarnpkg.com/expo-image-picker/-/expo-image-picker-14.0.3.tgz#ea0bbe796ccc3bd5e58fc00487be22bac317afeb"
+  integrity sha512-VN5wMWzhYhIRhFq8I1pjMbn/ivjlhWfxzJpz5jUOf3mQ8vxrI5GcR8cJO9kyYwuCrI9W3GUzh/aDt7QRSTQDDA==
   dependencies:
-    expo-image-loader "~4.1.0"
+    expo-image-loader "~4.0.0"
 
 expo-keep-awake@~11.0.1:
   version "11.0.1"
@@ -4157,10 +4152,10 @@ expo-location@~15.0.1:
   resolved "https://registry.yarnpkg.com/expo-location/-/expo-location-15.0.1.tgz#b132b8b50ce4d2dd9257b7b66cec44beeba253a4"
   integrity sha512-GOAP24m8fMahFcBT75H07f2+IQAOCOdNTzb8Ci/19NZ+Y/CY2lIvb55V8zu7Gn0+76FKPb7XC3ebQaq4ctn1QA==
 
-expo-mail-composer@^12.1.1:
-  version "12.1.1"
-  resolved "https://registry.yarnpkg.com/expo-mail-composer/-/expo-mail-composer-12.1.1.tgz#bf137f3d2383fa51af70c25d6a29602de5acc9ce"
-  integrity sha512-DJZpxdc6huwg8M9STfzL415xHGEaEXOseK2VyPAKKllWYR6m2gE18sXND9Ak8rcynZGTwyuaHrqJLBXd3I/LcQ==
+expo-mail-composer@~12.0.0:
+  version "12.0.0"
+  resolved "https://registry.yarnpkg.com/expo-mail-composer/-/expo-mail-composer-12.0.0.tgz#d7e98af7dfe4434a3167eb11cd87ffa55d7b0a84"
+  integrity sha512-Q1ko7D+knF1nOF2VKPc9AESowQaG7ta435PWjP0tKu33rmG4EzIzjHfDsCxMoQ9uiqJEwc1mdx/MOQpJlGEtLg==
   dependencies:
     query-string "^6.2.0"
 
@@ -4207,11 +4202,6 @@ expo-modules-core@1.1.1:
   dependencies:
     compare-versions "^3.4.0"
     invariant "^2.2.4"
-
-expo-permissions@^14.1.1:
-  version "14.1.1"
-  resolved "https://registry.yarnpkg.com/expo-permissions/-/expo-permissions-14.1.1.tgz#6fc4ec5caf712df3ff2d9b7b831a6d9116f1d2b8"
-  integrity sha512-hOuAOBz+ZLsSJ3E8Ere/oA7YIYLNGf9fCApTi9OQmeJyCBsBHynf1yqMfVVpuDcCMixZ2XzsWlScq75f+7U1dQ==
 
 expo-status-bar@~1.4.2:
   version "1.4.4"
