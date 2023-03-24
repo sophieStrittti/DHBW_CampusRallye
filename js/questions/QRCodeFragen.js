@@ -6,12 +6,14 @@ import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import { dhbwRed } from '../styles/Colors';
 
+
 export default function QRCodeFragen() {
   const navigation = useNavigation();
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [isLocationEnabled, setIsLocationEnabled] = useState(true);
   const dhbwbiblocation = {latitude: 47.61722471790031, longitude: 7.677300665290789,};
+
 
   useEffect(() => {
     (async () => {
