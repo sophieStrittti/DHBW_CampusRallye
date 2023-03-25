@@ -1,91 +1,97 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TextInput, Button, Alert, StyleSheet, Modal } from 'react-native';
 
-export default function GroupScreen() {
-  const [anweisung, setAnweisung] = useState("Bitte geben Sie einen Gruppennamen ein");
-  const [group, setGroup] = useState("");
-  const [confirmedGroup, setConfirmedGroup] = useState("");
-
-  const handleGroupSubmit = () => {
-    if (group.trim() === '') {
-      Alert.alert('Fehler', 'Bitte geben Sie einen Gruppennamen ein.');
-      return;
-    }
-
-    Alert.alert(
-      "Sicherheitsfrage",
-      `Bist du sicher, dass "${group}" dein Gruppenname ist?`,
-      [
-        {
-          text: "Abbrechen",
-          style: "cancel",
-        },
-        {
-          text: "Ja, Antwort bestätigen",
-          onPress: () => setConfirmedGroup(group),
-        },
-      ],
-    );
-  };
-
+export default function GroupScreen(props) {
   return (
     <View style={styles.container}>
-      <Text style={styles.question}>{anweisung}</Text>
-      <TextInput
-        style={styles.input}
-        value={group}
-        onChangeText={setGroup}
-        placeholder="Gib hier deinen Gruppennamen ein"
-      />
-      <Button
-        title="Name Absenden"
-        onPress={handleGroupSubmit}
-        disabled={!group}
-      />
-      {confirmedGroup ? (
-        <View style={styles.answerContainer}>
-          <Text style={styles.answerLabel}>Bestätigter Name:</Text>
-          <Text style={styles.answer}>{confirmedGroup}</Text>
-        </View>
-      ) : null}
+    <View style={styles.section}>
+    <Text style={styles.sectionTitle}>Bestätigte Gruppe</Text>
+    <View style={styles.row}>
+      <Text style={styles.label}>Gruppen Name:</Text>
+      <Text style={styles.value}>{props.confirmedGroup}</Text>
     </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
+    <View style={styles.row}>
+      <Text style={styles.label}>Mitglieder:</Text>
+      <Text style={styles.value}>{props.confirmedGroupMembers}</Text>
+    </View>
+    </View>
+    </View>
+    );
+    }
+    
+    const styles = StyleSheet.create({
+    container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 20,
-  },
-  question: {
+    },
+    modalContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    },
+    modalContent: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 20,
+    width: '80%',
+    alignItems: 'center',
+    },
+    modalText: {
     fontSize: 20,
     marginBottom: 20,
     textAlign: 'center',
-  },
-  inputLabel: {
+    },
+    inputLabel: {
     fontSize: 16,
     marginBottom: 5,
-  },
-  input: {
+    },
+    input: {
     width: '100%',
     height: 40,
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 20,
     paddingHorizontal: 10,
-  },
-  answerContainer: {
+    },
+    answerContainer: {
     marginTop: 20,
     alignItems: 'center',
-  },
-  answerLabel: {
+    },
+    answerLabel: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 5,
-  },
-  answer: {
+    },
+    answer: {
     fontSize: 16,
-  },
-});
+    },
+    section: {
+      marginTop: 20,
+      backgroundColor: '#fff',
+      borderRadius: 10,
+      padding: 20,
+      width: '100%',
+    },
+    sectionTitle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      marginBottom: 10,
+    },
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 5,
+    },
+    label: {
+      fontSize: 16,
+      color: '#666',
+      marginRight: 5,
+    },
+    value: {
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    });
