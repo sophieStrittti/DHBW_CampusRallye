@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet, Modal } from 'react-native';
 
-export default function GroupScreen() {
+export default function GroupScreen(props) {
   return (
     <View style={styles.container}>
     <View style={styles.section}>
     <Text style={styles.sectionTitle}>Bestätigte Gruppe</Text>
     <View style={styles.row}>
       <Text style={styles.label}>Gruppen Name:</Text>
-      <Text style={styles.value}>{"confirmedGroup"}</Text>
+      <Text style={styles.value}>{props.confirmedGroup}</Text>
     </View>
     <View style={styles.row}>
       <Text style={styles.label}>Mitglieder:</Text>
-      <Text style={styles.value}>{"confirmedGroupMembers"}</Text>
+      <Text style={styles.value}>{props.confirmedGroupMembers}</Text>
     </View>
     </View>
     </View>
