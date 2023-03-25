@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Button, Switch, TextInput } from 'react-native';
+import { StyleSheet, Text, View, Button, Switch, TextInput} from 'react-native';
 import React,{ useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
