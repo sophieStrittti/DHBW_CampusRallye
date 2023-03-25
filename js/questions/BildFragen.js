@@ -3,9 +3,12 @@ import { View, Text, Button, Image, Alert, StyleSheet } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 import * as MailComposer from 'expo-mail-composer';
+import { useNavigation } from '@react-navigation/native';
 
 export default function BildFragen() {
+  const navigation = useNavigation();
   const [selectedImage, setSelectedImage] = useState(null);
+  const [mailsend, setmailsend] = useState(null); 
 
   useEffect(() => {
     (async () => {
@@ -26,8 +29,8 @@ export default function BildFragen() {
       quality: 1,
     });
 
-    if (!result.cancelled) {
-      setSelectedImage(result.uri);
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
     }
   };
 
@@ -45,13 +48,30 @@ export default function BildFragen() {
     }
 
     let asset = await MediaLibrary.createAssetAsync(selectedImage);
-
+    setmailsend(selectedImage)
     MailComposer.composeAsync({
       recipients: ['example@mail.com'],
       subject: 'Gruppenfoto Gruppe: ',
       body: 'Das ist unser Gruppenfoto!',
       attachments: [asset.uri],
     });
+  };
+
+  const handleAnswerSubmit = () => {
+    Alert.alert(
+      "Sicherheitsfrage",
+      ` Hast du die Mail mit dem Bild abgesendet ?`,
+      [
+        {
+          text: "Abbrechen",
+          style: "cancel",
+        },
+        {
+          text: "Ja, ich habe die Mail gesendet",
+          onPress: () => navigation.navigate('Wissensfragen'),
+        },
+      ],
+    );
   };
 
   return (
@@ -69,6 +89,9 @@ export default function BildFragen() {
         <Button title="Senden" onPress={handleSendEmail} disabled={!selectedImage} style={styles.button} />
       </View>
       <Text style={styles.infoText}>Das aufgenommene Foto soll über den Button "SENDEN" per E-Mail gesendet werden</Text>
+      <View style={styles.buttonContainer}>
+        <Button title="Weiter" onPress={handleAnswerSubmit} disabled={!mailsend} style={styles.button} />
+      </View>
     </View>
   );
 }
