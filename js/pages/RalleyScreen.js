@@ -1,25 +1,58 @@
-import React from 'react';
+import { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { supabase } from '../../supabase';
+import Wissensfragen from '../questions/Wissensfragen';
+import BildFragen from '../questions/BildFragen';
+import QRCodeFragen from '../questions/QRCodeFragen';
+import QuestionScreen from '../questions/QuestionScreen.js';
+import {useSharedStates} from './sharedStates'
 
-// ...
+
 
 export default function RalleyScreen() {
   const navigation = useNavigation();
+  const {fragen, setFragen} = useSharedStates();
+  const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
+  const {points, setPoints} = useSharedStates();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: questions, error } = await supabase
+      .from('Fragen')
+      .select(); 
+
+      setFragen(questions);
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
+  
+  let content;
+  if (!loading && aktuelleFrage !== fragen.length) {
+    if (fragen[aktuelleFrage].typ === 'Wissensfragen'){
+      content = (
+        <Wissensfragen />
+      );
+    } else if (fragen[aktuelleFrage].typ === 'Bild') {
+      content = (
+        <BildFragen />
+      );
+    } else if (fragen[aktuelleFrage].typ === 'QRFragen') {
+      content = (
+        <QRCodeFragen />
+      );
+    }   
+  } else if (!loading) {
+    content=(
+      <Text style={styles.tileText}>Die Ralley wurde erforderlich beendet! Eure erreichte Punktzahl: {points}</Text>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.tile} onPress={() => navigation.navigate('Wissensfragen')}>
-        <Text style={styles.tileText}>Wissensfrage</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.tile} onPress={() => navigation.navigate('QRCodeFragen')}>
-        <Text style={styles.tileText}>QRCodeFrage</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.tile} onPress={() => navigation.navigate('BildFragen')}>
-        <Text style={styles.tileText}>BildFrage</Text>
-      </TouchableOpacity>
+      {content}
     </View>
   );
 }

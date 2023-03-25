@@ -1,10 +1,11 @@
 /* home screen */
+import { useEffect } from "react";
 
 /* TO DO: EDIT & ADD IMPORTS!!! -> moved from App.js*/
 const HomeScreen = ({navigation}) => {
 
     /* Disables to go back to privacy agreement screen. RalleyScreen is now the home Screen. */
-    React.useEffect(() =>
+    useEffect(() =>
       navigation.addListener('beforeRemove', (e) => {
         e.preventDefault();
       })

@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import {useSharedStates} from '../pages/sharedStates'
 import { supabase } from '../../supabase';
 
-
-export default function Wissensfragen() {
-
-  const [fragen, setFragen] = useState("")
-  
-  async function getData() {
-    let { data: questions, error } = await supabase
-    .from('fragen')
-    .select(); 
-    setFragen(JSON.stringify(questions));
-    return questions;
-  }
-
-  const [question, setQuestion] = useState("Was bedeutet die Abkürzung DHBW?");
+export default function Wissensfragen () {
+  const {fragen, setFragen} = useSharedStates();
+  const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
+  const {points, setPoints} = useSharedStates();
   const [answer, setAnswer] = useState("");
+  const [correctAnswer, setCorrectAnswer] = useState('');
   const [confirmedAnswer, setConfirmedAnswer] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: answer, error } = await supabase
+      .from('Wissensfragen')
+      .select('Antwort, Punkte') 
+      .eq('fragen_id', fragen[aktuelleFrage].id);
+      setCorrectAnswer(answer)
+    };
+    fetchData();
+  }, []);
+
+  const handleNext = () => {
+    console.log(answer.trim())
+    if (answer.trim() === correctAnswer[0].Antwort){
+      setPoints(points+correctAnswer[0].Punkte);
+    }
+    setAktuelleFrage(aktuelleFrage+1);   
+    setAnswer(""); 
+  }
 
   const handleAnswerSubmit = () => {
     if (answer.trim() === '') {
@@ -35,7 +47,7 @@ export default function Wissensfragen() {
         },
         {
           text: "Ja, Antwort bestätigen",
-          onPress: () => setConfirmedAnswer(answer),
+          onPress: () => handleNext(),
         },
       ],
     );
@@ -43,7 +55,7 @@ export default function Wissensfragen() {
   
   return (
     <View style={styles.container}>
-      <Text style={styles.question}>{question}</Text>
+      <Text style={styles.question}>{fragen[aktuelleFrage].frage}</Text>
       <Text style={styles.inputLabel}>Antwort:</Text>
       <TextInput
         style={styles.input}
@@ -56,25 +68,17 @@ export default function Wissensfragen() {
         onPress={handleAnswerSubmit}
         disabled={!answer}
       />
-      <Button
-        title="show data"
-        onPress={getData}
-      />
+      
       {confirmedAnswer ? (
         <View style={styles.answerContainer}>
           <Text style={styles.answerLabel}>Bestätigte Antwort:</Text>
           <Text style={styles.answer}>{confirmedAnswer}</Text>
         </View>
       ) : null}
-      {fragen ? (
-        <View style={styles.answerContainer}>
-          <Text style={styles.answerLabel}>Bestätigte Antwort:</Text>
-          <Text style={styles.answer}>{fragen}</Text>
-        </View>
-      ) : null}
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {

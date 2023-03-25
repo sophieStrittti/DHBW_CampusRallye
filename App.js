@@ -26,20 +26,23 @@ const Stack = createStackNavigator();
 
 /* main App; uses the defined pages and navigates between them */
 export default function App() {
+  const [enabled, setEnabled] = useState(true);
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Ralley" component={TabScreen} options={{headerShown: false}}/>
-        <Stack.Screen name="Impressum" component={ImpressumScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
-        <Stack.Screen name="Sprache" component={SpracheScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
-        <Stack.Screen name="Informationen" component={InformationenScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
-        <Stack.Screen name="Wissensfragen" component={Wissensfragen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
-        <Stack.Screen name="QRCodeFragen" component={QRCodeFragen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
-        <Stack.Screen name="BildFragen" component={BildFragen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
-        <Stack.Screen name="QRScan" component={QRScan} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+      {enabled ? (
+          <Stack.Navigator>
+          <Stack.Screen name="Ralley" component={TabScreen} options={{headerShown: false}}/>
+          <Stack.Screen name="Impressum" component={ImpressumScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+          <Stack.Screen name="Sprache" component={SpracheScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+          <Stack.Screen name="Informationen" component={InformationenScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+          <Stack.Screen name="Wissensfragen" component={Wissensfragen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+          <Stack.Screen name="QRCodeFragen" component={QRCodeFragen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+          <Stack.Screen name="BildFragen" component={BildFragen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+          <Stack.Screen name="QRScan" component={QRScan} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+        </Stack.Navigator>
+      ) : <Text>please Verify</Text>}
+      </NavigationContainer> 
   );
 }
 
