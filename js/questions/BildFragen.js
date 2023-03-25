@@ -4,9 +4,12 @@ import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 import * as MailComposer from 'expo-mail-composer';
 import { useNavigation } from '@react-navigation/native';
+import {useSharedStates} from '../pages/sharedStates'
 
 export default function BildFragen() {
   const navigation = useNavigation();
+  const {fragen, setFragen} = useSharedStates();
+  const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
   const [selectedImage, setSelectedImage] = useState(null);
   const [mailsend, setmailsend] = useState(null); 
 
@@ -57,6 +60,10 @@ export default function BildFragen() {
     });
   };
 
+  const handleNext = () => {
+    setAktuelleFrage(aktuelleFrage+1);      
+  }
+
   const handleAnswerSubmit = () => {
     Alert.alert(
       "Sicherheitsfrage",
@@ -68,7 +75,7 @@ export default function BildFragen() {
         },
         {
           text: "Ja, ich habe die Mail gesendet",
-          onPress: () => navigation.navigate('Wissensfragen'),
+          onPress: () => handleNext(),
         },
       ],
     );
@@ -76,7 +83,7 @@ export default function BildFragen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Sucht euch einen schönen Ort und macht gemeinsam ein Gruppenfoto</Text>
+      <Text style={styles.text}>{fragen[aktuelleFrage].frage}</Text>
       <View style={styles.imageContainer}>
         {selectedImage ? (
           <Image source={{ uri: selectedImage }} style={styles.image} />
@@ -90,7 +97,7 @@ export default function BildFragen() {
       </View>
       <Text style={styles.infoText}>Das aufgenommene Foto soll über den Button "SENDEN" per E-Mail gesendet werden</Text>
       <View style={styles.buttonContainer}>
-        <Button title="Weiter" onPress={handleAnswerSubmit} disabled={!mailsend} style={styles.button} />
+        <Button title="Weiter" onPress={handleAnswerSubmit} style={styles.button} />
       </View>
     </View>
   );

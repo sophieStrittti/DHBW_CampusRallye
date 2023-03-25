@@ -134,6 +134,7 @@ export default function App() {
     <NavigationContainer>
       {enabled ? (
           <Stack.Navigator>
+
           <Stack.Screen name="Ralley" options={{headerShown: false}}>
           {props => <TabScreen {...props} confirmedGroup={confirmedGroup} confirmedGroupMembers={confirmedGroupMembers} />}
         </Stack.Screen>

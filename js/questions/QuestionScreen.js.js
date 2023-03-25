@@ -1,50 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import firestore from '@react-native-firebase/firestore';
 
-export default function QuestionScreen() {
-  const [question, setQuestion] = useState(null);
-  const [answer, setAnswer] = useState('');
-
-  useEffect(() => {
-    const fetchQuestion = async () => {
-      const questionRef = firestore().collection('questions').doc('randomQuestion');
-      const doc = await questionRef.get();
-      if (!doc.exists) {
-        console.log('No such document!');
-      } else {
-        setQuestion(doc.data().text);
-      }
-    };
-    fetchQuestion();
-  }, []);
-
-  const saveAnswer = async () => {
-    const answersRef = firestore().collection('answers');
-    const newAnswerRef = await answersRef.add({
-      question: question,
-      answer: answer,
-    });
-    console.log('Answer saved with ID: ', newAnswerRef.id);
-    setAnswer('');
-  };
-
+export default function QuestionScreen({fragen, setFragen, aktuelleFrage, setAktuelleFrage}) {
+  console.log(fragen)
+  
   return (
     <View style={styles.container}>
-      {question && (
-        <>
-          <Text style={styles.question}>{question}</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={text => setAnswer(text)}
-            value={answer}
-            placeholder="Enter your answer"
-          />
-          <TouchableOpacity style={styles.button} onPress={saveAnswer}>
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableOpacity>
-        </>
-      )}
+      <Text>{fragen[aktuelleFrage].frage}</Text>
     </View>
   );
 }

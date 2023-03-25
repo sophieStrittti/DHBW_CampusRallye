@@ -1,19 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
 import { dhbwRed } from '../styles/Colors';
+import {useSharedStates} from '../pages/sharedStates'
+import { supabase } from '../../supabase';
 
-
-export default function QRCodeFragen() {
+export default function QRCodeFragen(props) {
   const navigation = useNavigation();
+  const {fragen, setFragen} = useSharedStates();
+  const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [isLocationEnabled, setIsLocationEnabled] = useState(true);
-  const dhbwbiblocation = {latitude: 47.61722471790031, longitude: 7.677300665290789,};
+  const [markerLocation, setMarkerLocation] = useState({latitude: 47.617030510990055,longitude:7.6782348392200195});
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data: answer, error } = await supabase
+      .from('QRFragen')
+      .select('Latitude, Longitude') 
+      .eq('fragen_id', fragen[aktuelleFrage].id);
+      setMarkerLocation({
+        latitude: answer[0].Latitude,
+        longitude: answer[0].Longitude
+      })
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -72,14 +88,14 @@ export default function QRCodeFragen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.title}>Gehe zur Bibliothek der DHBW Lörrach und scanne den QR-Code für die nächste Aufgabe</Text>
+        <Text style={styles.title}>{fragen[aktuelleFrage].frage}</Text>
       </View>
       <View style={styles.mapContainer}>
-        <MapView style={styles.map} region={mapRegion}>
+        <MapView style={styles.map} initialregion={mapRegion} region={mapRegion}>
           <Marker coordinate={userlocation}>
             <MaterialIcon name="gps-fixed" size={35} color={"blue"}/>
           </Marker>
-          <Marker coordinate={dhbwbiblocation}>
+          <Marker coordinate={markerLocation}>
             <MaterialIcon name="place" size={60} color={"red"} />
           </Marker>
         </MapView>
@@ -118,7 +134,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+    flex: 1,
   },
   buttonContainer: {
     flex: 1,
