@@ -1,7 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import { supabase } from '../../supabase';
+
 
 export default function Wissensfragen() {
+
+  const [fragen, setFragen] = useState("")
+  
+  async function getData() {
+    let { data: questions, error } = await supabase
+    .from('fragen')
+    .select(); 
+    setFragen(JSON.stringify(questions));
+    return questions;
+  }
+
   const [question, setQuestion] = useState("Was bedeutet die Abkürzung DHBW?");
   const [answer, setAnswer] = useState("");
   const [confirmedAnswer, setConfirmedAnswer] = useState("");
@@ -27,7 +40,7 @@ export default function Wissensfragen() {
       ],
     );
   };
-
+  
   return (
     <View style={styles.container}>
       <Text style={styles.question}>{question}</Text>
@@ -43,10 +56,20 @@ export default function Wissensfragen() {
         onPress={handleAnswerSubmit}
         disabled={!answer}
       />
+      <Button
+        title="show data"
+        onPress={getData}
+      />
       {confirmedAnswer ? (
         <View style={styles.answerContainer}>
           <Text style={styles.answerLabel}>Bestätigte Antwort:</Text>
           <Text style={styles.answer}>{confirmedAnswer}</Text>
+        </View>
+      ) : null}
+      {fragen ? (
+        <View style={styles.answerContainer}>
+          <Text style={styles.answerLabel}>Bestätigte Antwort:</Text>
+          <Text style={styles.answer}>{fragen}</Text>
         </View>
       ) : null}
     </View>

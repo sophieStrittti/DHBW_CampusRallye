@@ -1,5 +1,7 @@
+
 import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
 import React,{ useState, useEffect } from 'react';
+
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -8,7 +10,6 @@ import { Screen } from 'react-native-screens';
 import { supabase } from './supabase';
 
 import Color from './js/styles/Colors';
-
 
 import RalleyScreen from './js/pages/RalleyScreen';
 import SettingsScreen from './js/pages/SettingsScreen';
@@ -128,6 +129,7 @@ export default function App() {
       ],
     );
   };
+
   return (
     <NavigationContainer>
       {enabled ? (
