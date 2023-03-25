@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet, Modal } from 'react-native';
 import { supabase } from '../../supabase';
 
@@ -16,17 +16,18 @@ export default function GroupScreen() {
   const [confirmedGroupMembers, setConfirmedGroupMembers] = useState("");
   const [showModal3, setShowModal3] = useState(false);
 
-  const [realpassword, setrealpassword] = useState("")
+  const [realpassword, setrealpassword] = useState(null)
 
-  async function getData() {
-    let { data: realpassword, error } = await supabase
-    .from('Ralley')
-    .select('password');
-    setrealpassword(realpassword[0].password);
-    return realpassword;
-  }
-  //const realpassword = '123';
-  getData();
+  useEffect(() => {
+    async function getData() {
+      let { data: realpassword, error } = await supabase
+      .from('Ralley')
+      .select('password');
+      setrealpassword(realpassword[0].password);
+    }
+    getData();
+  }, []);
+  
   const handlePasswordSubmit = () => {
     if (password.trim() === '') {
       Alert.alert('Fehler', 'Bitte geben Sie das richtige Passwort ein.');
