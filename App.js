@@ -35,7 +35,7 @@ function PasswordPrompt({ onPasswordSubmit }) {
 
   return (
     <View style={styles.passwordContainer}>
-      <Text style={styles.passwordLabel}>Please enter password:</Text>
+      <Text style={styles.passwordLabel}>Bitte geben Sie das Passwort ein</Text>
       <TextInput
         style={styles.passwordInput}
         secureTextEntry={true}
@@ -75,7 +75,7 @@ export default function App() {
       setShowPasswordPrompt(false);
       setShowGroupPrompt(true);
     } else {
-      Alert.alert("Wrong password", "Please enter the correct password.");
+      Alert.alert("Falsches Passwort", "Bitte geben Sie das richtige Passwort ein.");
     }
   }
   
@@ -106,13 +106,13 @@ export default function App() {
 
   const handleGroupMembersSubmit = () => {
     if (groupMembers.trim() === '') {
-      Alert.alert('Fehler', 'Bitte geben Sie einen Gruppengröße ein.');
+      Alert.alert('Fehler', 'Bitte geben Sie die Namen der Mitglieder ein.');
       return;
     }
 
     Alert.alert(
       "Sicherheitsfrage",
-      `Bist du sicher, dass ihr insgesamt"${groupMembers}" Personen in der Gruppe seid?`,
+      `Bist du sicher, dass "${groupMembers}" zusammen eine Gruppe bilden?`,
       [
         {
           text: "Abbrechen",
@@ -147,6 +147,7 @@ export default function App() {
         <PasswordPrompt onPasswordSubmit={handlePasswordSubmit} />
       ) : showGroupPrompt ? (
         <View style={styles.passwordContainer}>
+        <Text style={styles.passwordLabel}>Bitte geben Sie einen Gruppennamen ein</Text>
         <TextInput
                style={styles.passwordInput}
                value={group}
@@ -160,6 +161,7 @@ export default function App() {
              />
         </View>
       ) : <View style={styles.passwordContainer}>
+        <Text style={styles.passwordLabel}>Bitte geben Sie die Namen der Gruppenmitglieder ein</Text>
       <TextInput
              style={styles.passwordInput}
              value={groupMembers}
