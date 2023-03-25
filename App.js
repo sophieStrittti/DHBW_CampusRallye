@@ -42,7 +42,7 @@ function PasswordPrompt({ onPasswordSubmit }) {
         onChangeText={setPassword}
         value={password}
       />
-      <Button title="Submit" onPress={handlePasswordSubmit} />
+      <Button title="Weiter" onPress={handlePasswordSubmit} />
     </View>
   );
 }
@@ -169,7 +169,7 @@ export default function App() {
              placeholder="Gib hier die Mitglieder ein"
            />
       <Button
-             title="Name Absenden"
+             title="Namen Absenden"
              onPress={handleGroupMembersSubmit}
              disabled={!groupMembers}
            />
