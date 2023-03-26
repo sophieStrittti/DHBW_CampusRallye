@@ -63,5 +63,4 @@ buck-out/
 .expo/*
 web-build/
 
-app.json
 yarn.lock
