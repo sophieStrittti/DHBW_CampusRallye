@@ -1,8 +1,6 @@
 # DHBW_CampusRallyeApp
 
-Projekt der Studienarbeit an der DHBW Lörrach
-
-Achtung! app.json wird nicht mit hochgeladen
+Projekt der Studienarbeit an der DHBW Lörrach durch Studierende.
 
 ## Setup für Entwickler
 Voraussetzungen für das erfolgreiche Weiterentwickeln und lokale Testen dieses Projekts sind folgende:
