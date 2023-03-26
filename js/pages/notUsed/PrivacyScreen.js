@@ -1,8 +1,7 @@
-/* not used for first Version, privacy sheet by ralley organizer */
+/* not used for first Version, privacy sheet by ralley organizer. Could be used in the future if server at DHBW is used. */
 
 /* page vor simple privacy agreement */
 
-/* TO DO: EDIT & ADD IMPORTS!!! -> moved from App.js*/
 const PrivacyScreen = ({navigation}) => {
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);

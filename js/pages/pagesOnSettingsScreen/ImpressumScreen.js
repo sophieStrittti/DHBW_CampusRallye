@@ -1,6 +1,6 @@
 import React from 'react';
 import {Linking, ScrollView, View, Text, StyleSheet } from 'react-native';
-import Colors from '../styles/Colors';
+import Colors from '../../styles/Colors';
 
 export default function ImpressumScreen() {
   return (

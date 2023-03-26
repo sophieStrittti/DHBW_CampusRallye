@@ -4,10 +4,8 @@ import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation } from '@react-navigation/native';
-import { dhbwRed } from '../styles/Colors';
-import {useSharedStates} from '../pages/sharedStates'
-import { supabase } from '../../supabase';
-import { BarCodeScanner } from 'expo-barcode-scanner';
+import {useSharedStates} from '../sharedStates'
+import { supabase } from '../../../supabase';
 import QRScan from './QRScan';
 
 export default function QRCodeFragen() {
@@ -26,7 +24,7 @@ export default function QRCodeFragen() {
       const { data: answer, error } = await supabase
       .from('QRFragen')
       .select('Latitude, Longitude, fragen_id') 
-      .eq('fragen_id', fragen[aktuelleFrage].id);
+      .eq('fragen_id', fragen[aktuelleFrage].fragen_id);
       setMarkerLocation({
         latitude: answer[0].Latitude,
         longitude: answer[0].Longitude

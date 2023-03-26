@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
-import {useSharedStates} from '../pages/sharedStates'
-import { supabase } from '../../supabase';
+import {useSharedStates} from '../sharedStates'
+import { supabase } from '../../../supabase';
 
 export default function Wissensfragen () {
   const {fragen, setFragen} = useSharedStates();
@@ -17,7 +17,7 @@ export default function Wissensfragen () {
       const { data: answer, error } = await supabase
       .from('Wissensfragen')
       .select('Antwort, Punkte') 
-      .eq('fragen_id', fragen[aktuelleFrage].id);
+      .eq('fragen_id', fragen[aktuelleFrage].fragen_id);
       setCorrectAnswer(answer)
     };
     fetchData();

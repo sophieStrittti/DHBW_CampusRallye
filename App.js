@@ -1,4 +1,3 @@
-
 import { StyleSheet, Text, View, Button, TextInput, Alert } from 'react-native';
 import React,{ useState, useEffect } from 'react';
 
@@ -6,21 +5,19 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Screen } from 'react-native-screens';
 import { supabase } from './supabase';
 
 import Color from './js/styles/Colors';
 
-import RalleyScreen from './js/pages/RalleyScreen';
+import RallyeScreen from './js/pages/RallyeScreen';
 import SettingsScreen from './js/pages/SettingsScreen';
 import GroupScreen from './js/pages/GroupScreen';
-import ImpressumScreen from './js/pages/ImpressumScreen';
-import SpracheScreen from './js/pages/SpracheScreen';
-import InformationenScreen from './js/pages/InformationenScreen';
-import QRCodeFragen from './js/questions/QRCodeFragen';
-import Wissensfragen from './js/questions/Wissensfragen';
-import BildFragen from './js/questions/BildFragen';
-import QRScan from './js/questions/QRScan';
+import ImpressumScreen from './js/pages/pagesOnSettingsScreen/ImpressumScreen';
+import InformationenScreen from './js/pages/pagesOnSettingsScreen/InformationenScreen';
+import QRCodeFragen from './js/pages/questions/QRCodeFragen';
+import Wissensfragen from './js/pages/questions/Wissensfragen';
+import BildFragen from './js/pages/questions/BildFragen';
+import QRScan from './js/pages/questions/QRScan';
 
 
 const Tab = createBottomTabNavigator();
@@ -64,7 +61,7 @@ export default function App() {
   useEffect(() => {
     async function getData() {
       let { data: realpassword, error } = await supabase
-      .from('Ralley')
+      .from('Rallye')
       .select('password');
       setrealpassword(realpassword[0].password);
     }
@@ -135,11 +132,10 @@ export default function App() {
       {enabled ? (
           <Stack.Navigator>
 
-          <Stack.Screen name="Ralley" options={{headerShown: false}}>
+          <Stack.Screen name="Rallye" options={{headerShown: false}}>
             {props => <TabScreen {...props} confirmedGroup={confirmedGroup} confirmedGroupMembers={confirmedGroupMembers} />}
           </Stack.Screen>
           <Stack.Screen name="Impressum" component={ImpressumScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
-          <Stack.Screen name="Sprache" component={SpracheScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
           <Stack.Screen name="Informationen" component={InformationenScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
           <Stack.Screen name="Wissensfragen" component={Wissensfragen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
           <Stack.Screen name="QRCodeFragen" component={QRCodeFragen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
@@ -189,7 +185,7 @@ function TabScreen(props) {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
-          if (route.name === 'DHBW Campus Ralley') {
+          if (route.name === 'DHBW Campus Rallye') {
             iconName = 'map';
           } else if (route.name === 'Einstellungen') {
             iconName = 'settings';
@@ -204,8 +200,8 @@ function TabScreen(props) {
       <Tab.Screen name="Gruppe" options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}>
         {props => <GroupScreen {...props} confirmedGroup={confirmedGroup} confirmedGroupMembers={confirmedGroupMembers} />}
       </Tab.Screen>
-      <Tab.Screen name="DHBW Campus Ralley" options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}>
-        {props => <RalleyScreen {...props} confirmedGroup={confirmedGroup} confirmedGroupMembers={confirmedGroupMembers} />}
+      <Tab.Screen name="DHBW Campus Rallye" options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}>
+        {props => <RallyeScreen {...props} confirmedGroup={confirmedGroup} confirmedGroupMembers={confirmedGroupMembers} />}
       </Tab.Screen>
       <Tab.Screen name="Einstellungen" component={SettingsScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
     </Tab.Navigator>
