@@ -136,8 +136,8 @@ export default function App() {
           <Stack.Navigator>
 
           <Stack.Screen name="Ralley" options={{headerShown: false}}>
-          {props => <TabScreen {...props} confirmedGroup={confirmedGroup} confirmedGroupMembers={confirmedGroupMembers} />}
-        </Stack.Screen>
+            {props => <TabScreen {...props} confirmedGroup={confirmedGroup} confirmedGroupMembers={confirmedGroupMembers} />}
+          </Stack.Screen>
           <Stack.Screen name="Impressum" component={ImpressumScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
           <Stack.Screen name="Sprache" component={SpracheScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
           <Stack.Screen name="Informationen" component={InformationenScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
@@ -202,9 +202,11 @@ function TabScreen(props) {
         tabBarInactiveTintColor: Color.dhbwGray,
       })}>
       <Tab.Screen name="Gruppe" options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}>
-      {props => <GroupScreen {...props} confirmedGroup={confirmedGroup} confirmedGroupMembers={confirmedGroupMembers} />}
+        {props => <GroupScreen {...props} confirmedGroup={confirmedGroup} confirmedGroupMembers={confirmedGroupMembers} />}
       </Tab.Screen>
-      <Tab.Screen name="DHBW Campus Ralley" component={RalleyScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
+      <Tab.Screen name="DHBW Campus Ralley" options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}>
+        {props => <RalleyScreen {...props} confirmedGroup={confirmedGroup} confirmedGroupMembers={confirmedGroupMembers} />}
+      </Tab.Screen>
       <Tab.Screen name="Einstellungen" component={SettingsScreen} options={{ headerStyle: {backgroundColor: Color.dhbwRed}, headerTintColor: Color.tabHeader}}/>
     </Tab.Navigator>
   );

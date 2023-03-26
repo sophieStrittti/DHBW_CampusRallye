@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button } from 'react-native';
+import { Text, View, StyleSheet, Button, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import {useSharedStates} from '../pages/sharedStates'
 import { useNavigation } from '@react-navigation/native';
@@ -13,6 +13,8 @@ export default function QRScan() {
   const [correctAnswer, setCorrectAnswer] = useState('');
   const {fragen, setFragen} = useSharedStates();
   const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
+  const {qrscan, setQrscan} = useSharedStates();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +41,7 @@ export default function QRScan() {
     } else if (correctAnswer[0].QR_Info === data) {
       setAktuelleFrage(aktuelleFrage+1);
     }
+    setQrscan(false)
     navigation.navigate('Ralley');
   };
 
@@ -50,7 +53,7 @@ export default function QRScan() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.qrscancontainer}>
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={StyleSheet.absoluteFillObject}
@@ -60,8 +63,10 @@ export default function QRScan() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  qrscancontainer: {
     flex: 1,
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
     flexDirection: 'column',
     justifyContent: 'center',
   },
