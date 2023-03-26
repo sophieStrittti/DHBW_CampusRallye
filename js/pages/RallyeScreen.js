@@ -7,6 +7,7 @@ import QRCodeFragen from './questions/QRCodeFragen';
 import {useSharedStates} from './sharedStates'
 
 export default function RallyeScreen(props) {
+  // import shared States
   const {fragen, setFragen} = useSharedStates();
   const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
   const {points, setPoints} = useSharedStates();

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useBetween } from 'use-between';
 
-
 function sharedStates() {
+  // set all States, that have to be used between different components
   const [fragen, setFragen] = useState([]);
   const [aktuelleFrage, setAktuelleFrage] = useState(0);
   const [points, setPoints] = useState(0)
@@ -19,4 +19,5 @@ function sharedStates() {
   }
 }
 
+// make States usable for the components
 export const useSharedStates = () => useBetween(sharedStates);

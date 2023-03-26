@@ -10,6 +10,7 @@ import QRScan from './QRScan';
 
 export default function QRCodeFragen() {
   const navigation = useNavigation();
+  // import shared States
   const {fragen, setFragen} = useSharedStates();
   const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
   const {qrscan, setQrscan} = useSharedStates();

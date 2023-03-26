@@ -3,7 +3,7 @@ import { View, Text, TextInput, Button, Alert, StyleSheet, Modal } from 'react-n
 import {useSharedStates} from './sharedStates'
 
 export default function GroupScreen(props) {
-
+  // import shared States
   const {points, fragen, aktuelleFrage} = useSharedStates();
 
   return (

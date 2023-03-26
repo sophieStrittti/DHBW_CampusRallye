@@ -8,6 +8,8 @@ import {useSharedStates} from '../sharedStates'
 
 export default function BildFragen() {
   const navigation = useNavigation();
+
+  // import shared States
   const {fragen, setFragen} = useSharedStates();
   const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
   const [selectedImage, setSelectedImage] = useState(null);
