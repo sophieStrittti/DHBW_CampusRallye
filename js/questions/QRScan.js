@@ -53,21 +53,60 @@ export default function QRScan() {
   }
 
   return (
-    <View style={styles.qrscancontainer}>
-      <BarCodeScanner
-        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
-        style={StyleSheet.absoluteFillObject}
-      />
+    <View >
+      <View style={styles.mapContainer}>
+        <BarCodeScanner
+          style={styles.map}
+          onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        />
+      </View>
+      <View style={styles.buttonContainer}>
+        <Button title='Zurück' onPress={() => setQrscan(false)} color="red"/>
+        <Text style={styles.title}>Hinweis: falls nicht gescannt wird, einmal zurück und neu auf Scannen klicken!</Text>
+      </View>
     </View>
+
   );
 }
 
 const styles = StyleSheet.create({
   qrscancontainer: {
     flex: 1,
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    width: '100%',
+    height: '50%',
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+  buttonContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  container: {
+    flex: 1,
+    position: "absolute",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  header: {
+    flex: 1,
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+  },
+  title: {
+    fontSize: Dimensions.get("window").height *0.025,
+    textAlign: 'center',
+  },
+  mapContainer: {
+    flex: 6,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  map: {
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height * 0.6,
+    flex: 1,
   },
 });

@@ -90,7 +90,7 @@ export default function QRCodeFragen() {
   let content; 
   
   const handlepress  = () => {
-    setQrscan(true);
+    setQrscan(!qrscan);
   }
 
   if (!qrscan){
@@ -120,7 +120,9 @@ export default function QRCodeFragen() {
     );
   } else if (qrscan) {
     content = (
-      <QRScan/>
+      <View>
+        <QRScan/>
+      </View>
     );
   }
 
@@ -145,7 +147,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   title: {
-    fontSize: 20,
+    fontSize: Dimensions.get("window").height *0.025,
     textAlign: 'center',
   },
   mapContainer: {
@@ -167,7 +169,7 @@ const styles = StyleSheet.create({
   qrscancontainer: {
     flex: 1,
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    height: Dimensions.get("window").height * 0.7,
     flexDirection: 'column',
     justifyContent: 'center',
   },
