@@ -5,7 +5,6 @@ import { supabase } from '../../supabase';
 import Wissensfragen from '../questions/Wissensfragen';
 import BildFragen from '../questions/BildFragen';
 import QRCodeFragen from '../questions/QRCodeFragen';
-import QuestionScreen from '../questions/QuestionScreen.js';
 import {useSharedStates} from './sharedStates'
 
 export default function RalleyScreen(props) {
@@ -103,6 +102,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#fff'
   },
 
   tile: {
