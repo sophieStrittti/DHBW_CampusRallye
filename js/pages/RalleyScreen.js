@@ -22,6 +22,15 @@ export default function RalleyScreen(props) {
       .from('Fragen')
       .select(); 
 
+      // get random question as start point
+      let startQuestion = questions[Math.floor(Math.random()*questions.length)];
+      let index = questions.indexOf(startQuestion);
+    
+      // rotate array until startQuestion is first element in array
+      for (let i = 0; i < index; i++) {
+        let question = questions[0]
+        questions.shift(questions.push(question));
+      }
       setFragen(questions);
       setLoading(false);
     };
