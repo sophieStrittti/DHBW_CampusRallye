@@ -7,11 +7,15 @@ import { useNavigation } from '@react-navigation/native';
 import { dhbwRed } from '../styles/Colors';
 import {useSharedStates} from '../pages/sharedStates'
 import { supabase } from '../../supabase';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+import QRScan from './QRScan';
 
-export default function QRCodeFragen(props) {
+export default function QRCodeFragen() {
   const navigation = useNavigation();
   const {fragen, setFragen} = useSharedStates();
   const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
+  const {qrscan, setQrscan} = useSharedStates();
+
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
   const [isLocationEnabled, setIsLocationEnabled] = useState(true);
@@ -21,7 +25,7 @@ export default function QRCodeFragen(props) {
     const fetchData = async () => {
       const { data: answer, error } = await supabase
       .from('QRFragen')
-      .select('Latitude, Longitude') 
+      .select('Latitude, Longitude, fragen_id') 
       .eq('fragen_id', fragen[aktuelleFrage].id);
       setMarkerLocation({
         latitude: answer[0].Latitude,
@@ -29,7 +33,7 @@ export default function QRCodeFragen(props) {
       })
     };
     fetchData();
-  }, []);
+  }, [!qrscan]);
 
   useEffect(() => {
     (async () => {
@@ -42,7 +46,6 @@ export default function QRCodeFragen(props) {
       const location = await Location.getCurrentPositionAsync({});
       setLocation(location);
     })();
-
     if (isLocationEnabled) {
       const locationSubscriber = Location.watchPositionAsync(
         {
@@ -84,29 +87,46 @@ export default function QRCodeFragen(props) {
     latitudeDelta: 0.0004,
     longitudeDelta: 0.004,
   };
+  let content; 
+  
+  const handlepress  = () => {
+    setQrscan(true);
+  }
+
+  if (!qrscan){
+    content = (
+      <View>
+        <View style={styles.header}>
+          <Text style={styles.title}>{fragen[aktuelleFrage].frage}</Text>
+        </View>
+        <View style={styles.mapContainer}>
+          <MapView style={styles.map}  region={mapRegion}>
+            <Marker coordinate={userlocation}>
+              <MaterialIcon name="gps-fixed" size={35} color={"blue"}/>
+            </Marker>
+            <Marker coordinate={markerLocation}>
+              <MaterialIcon name="place" size={60} color={"red"} />
+            </Marker>
+          </MapView>
+        </View>
+        <View style={styles.buttonContainer}>
+          <Button
+            title={'QR-Code Scannen'}
+            onPress={() => handlepress()}
+            color={'red'}
+          />
+        </View>
+      </View>
+    );
+  } else if (qrscan) {
+    content = (
+      <QRScan/>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.title}>{fragen[aktuelleFrage].frage}</Text>
-      </View>
-      <View style={styles.mapContainer}>
-        <MapView style={styles.map} initialregion={mapRegion} region={mapRegion}>
-          <Marker coordinate={userlocation}>
-            <MaterialIcon name="gps-fixed" size={35} color={"blue"}/>
-          </Marker>
-          <Marker coordinate={markerLocation}>
-            <MaterialIcon name="place" size={60} color={"red"} />
-          </Marker>
-        </MapView>
-      </View>
-      <View style={styles.buttonContainer}>
-        <Button
-          title={'QR-Code Scannen'}
-          onPress={() => navigation.navigate('QRScan')}
-          color={'red'}
-        />
-      </View>
+      {content}
     </View>
   );
 }
@@ -114,6 +134,7 @@ export default function QRCodeFragen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    position: "absolute",
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
@@ -135,12 +156,19 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    height: Dimensions.get("window").height * 0.7,
     flex: 1,
   },
   buttonContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  qrscancontainer: {
+    flex: 1,
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+    flexDirection: 'column',
+    justifyContent: 'center',
   },
 });

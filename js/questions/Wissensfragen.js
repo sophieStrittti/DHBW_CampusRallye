@@ -10,6 +10,7 @@ export default function Wissensfragen () {
   const [answer, setAnswer] = useState("");
   const [correctAnswer, setCorrectAnswer] = useState('');
   const [confirmedAnswer, setConfirmedAnswer] = useState("");
+  const [answered, setAnswered] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,18 +21,19 @@ export default function Wissensfragen () {
       setCorrectAnswer(answer)
     };
     fetchData();
-  }, []);
+  }, [!answered]);
 
   const handleNext = () => {
-    console.log(answer.trim())
     if (answer.trim() === correctAnswer[0].Antwort){
       setPoints(points+correctAnswer[0].Punkte);
     }
     setAktuelleFrage(aktuelleFrage+1);   
     setAnswer(""); 
-  }
+    setAnswered(false);
+  };
 
   const handleAnswerSubmit = () => {
+    setAnswered(true);
     if (answer.trim() === '') {
       Alert.alert('Fehler', 'Bitte geben Sie eine Antwort ein.');
       return;

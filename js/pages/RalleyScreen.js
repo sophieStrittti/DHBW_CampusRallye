@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { supabase } from '../../supabase';
 import Wissensfragen from '../questions/Wissensfragen';
@@ -8,14 +8,13 @@ import QRCodeFragen from '../questions/QRCodeFragen';
 import QuestionScreen from '../questions/QuestionScreen.js';
 import {useSharedStates} from './sharedStates'
 
-
-
-export default function RalleyScreen() {
+export default function RalleyScreen(props) {
   const navigation = useNavigation();
   const {fragen, setFragen} = useSharedStates();
   const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
   const {points, setPoints} = useSharedStates();
   const [loading, setLoading] = useState(true);
+  const [uploaded, setUploaded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,6 +27,26 @@ export default function RalleyScreen() {
     };
     fetchData();
   }, []);
+  
+  
+  async function savePoints() {
+    try {
+      const updates = {
+        Gruppenname: props.confirmedGroup,
+        Punktzahl: points,
+      };
+
+      let { error } = await supabase.from('Gruppen').insert(updates);
+      setUploaded(true);
+      if (error) {
+        throw error
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        Alert.alert(error.message)
+      }
+    } 
+  }
   
   let content;
   if (!loading && aktuelleFrage !== fragen.length) {
@@ -45,8 +64,20 @@ export default function RalleyScreen() {
       );
     }   
   } else if (!loading) {
+  
     content=(
-      <Text style={styles.tileText}>Die Ralley wurde erforderlich beendet! Eure erreichte Punktzahl: {points}</Text>
+      <View>
+        <Text style={styles.endText}>Die Ralley wurde erforderlich beendet! Eure erreichte Punktzahl: {points}</Text>
+        <Text style={styles.tileText}>Ladet gerne euren Gruppennamen und eure Punktzahl hoch, um im Ranking aufgenommen zu werden! Einfach auf 'Hochladen' klicken.</Text>
+        <View>
+          <Button
+            title="Hochladen"
+            onPress={() => savePoints()}
+            color={'red'}
+            disabled={uploaded}
+          />
+        </View>
+      </View>
     );
   }
 
@@ -79,6 +110,11 @@ const styles = StyleSheet.create({
 
   tileText: {
     fontSize: 20,
+    color: 'grey',
+  },
+
+  endText: {
+    fontSize: 30,
     color: 'grey',
   },
 });

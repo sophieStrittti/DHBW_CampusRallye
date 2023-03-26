@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet, Modal } from 'react-native';
+import {useSharedStates} from './sharedStates'
 
 export default function GroupScreen(props) {
+
+  const {points, fragen, aktuelleFrage} = useSharedStates();
+
   return (
     <View style={styles.container}>
     <View style={styles.section}>
@@ -13,6 +17,14 @@ export default function GroupScreen(props) {
     <View style={styles.row}>
       <Text style={styles.label}>Mitglieder:</Text>
       <Text style={styles.value}>{props.confirmedGroupMembers}</Text>
+    </View>
+    <View style={styles.row}>
+      <Text style={styles.label}>Beantwortete Fragen</Text>
+      <Text style={styles.value}>{aktuelleFrage} von {fragen.length}</Text>
+    </View>
+    <View style={styles.row}>
+      <Text style={styles.label}>Aktuelle Punktzahl:</Text>
+      <Text style={styles.value}>{points}</Text>
     </View>
     </View>
     </View>

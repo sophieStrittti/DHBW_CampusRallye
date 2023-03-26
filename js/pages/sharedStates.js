@@ -6,13 +6,16 @@ function sharedStates() {
   const [fragen, setFragen] = useState([]);
   const [aktuelleFrage, setAktuelleFrage] = useState(0);
   const [points, setPoints] = useState(0)
+  const [qrscan, setQrscan] = useState(false)
   return {
     fragen,
     setFragen,
     aktuelleFrage,
     setAktuelleFrage,
     points,
-    setPoints
+    setPoints,
+    qrscan,
+    setQrscan
   }
 }
 
