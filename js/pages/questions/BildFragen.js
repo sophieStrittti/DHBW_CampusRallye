@@ -5,6 +5,7 @@ import * as MediaLibrary from 'expo-media-library';
 import * as MailComposer from 'expo-mail-composer';
 import { useNavigation } from '@react-navigation/native';
 import {useSharedStates} from '../sharedStates'
+import { supabase } from '../../../supabase';
 
 export default function BildFragen() {
   const navigation = useNavigation();
@@ -13,7 +14,16 @@ export default function BildFragen() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [mailsend, setmailsend] = useState(null); 
 
+  const [mailadress, setmailadress] = useState(null) 
+
   useEffect(() => {
+    async function getData() {
+      let { data: mailadress, error } = await supabase
+      .from('Rallye')
+      .select('mail');
+      setmailadress(mailadress[0].mail);
+    }
+    getData();
     (async () => {
       if (Platform.OS !== 'web') {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -23,6 +33,7 @@ export default function BildFragen() {
       }
     })();
   }, []);
+  console.log(mailadress)
 
   const handleLaunchCamera = async () => {
     let result = await ImagePicker.launchCameraAsync({
@@ -53,7 +64,7 @@ export default function BildFragen() {
     let asset = await MediaLibrary.createAssetAsync(selectedImage);
     setmailsend(selectedImage)
     MailComposer.composeAsync({
-      recipients: ['example@mail.com'],
+      recipients: [mailadress],
       subject: 'Gruppenfoto Gruppe: ',
       body: 'Das ist unser Gruppenfoto!',
       attachments: [asset.uri],
