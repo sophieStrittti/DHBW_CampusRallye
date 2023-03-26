@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button, Dimensions } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import {useSharedStates} from '../pages/sharedStates'
+import {useSharedStates} from '../sharedStates'
 import { useNavigation } from '@react-navigation/native';
-import { supabase } from '../../supabase';
+import { supabase } from '../../../supabase';
 
 export default function QRScan() {
   const navigation = useNavigation();
@@ -21,7 +21,7 @@ export default function QRScan() {
       const { data: answer, error } = await supabase
       .from('QRFragen')
       .select('QR_Info') 
-      .eq('fragen_id', fragen[aktuelleFrage].id);
+      .eq('fragen_id', fragen[aktuelleFrage].fragen_id);
       setCorrectAnswer(answer)
     };
     fetchData();
@@ -42,7 +42,7 @@ export default function QRScan() {
       setAktuelleFrage(aktuelleFrage+1);
     }
     setQrscan(false)
-    navigation.navigate('Ralley');
+    navigation.navigate('Rallye');
   };
 
   if (hasPermission === null) {

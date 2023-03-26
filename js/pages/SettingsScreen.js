@@ -13,10 +13,6 @@ export default function SettingsScreen() {
         <Text style={styles.tileText}>Impressum</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.tile} onPress={() => navigation.navigate('Sprache')}>
-        <Text style={styles.tileText}>Sprache und Steuerung</Text>
-      </TouchableOpacity>
-
       <TouchableOpacity style={styles.tile} onPress={() => navigation.navigate('Informationen')}>
         <Text style={styles.tileText}>Informationen</Text>
       </TouchableOpacity>

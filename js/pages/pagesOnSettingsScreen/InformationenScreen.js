@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Linking, ScrollView, StyleSheet } from 'react-native';
-import Colors from '../styles/Colors';
+import Colors from '../../styles/Colors';
 
 export default function InformationenScreen() {
   return (

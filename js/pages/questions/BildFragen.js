@@ -4,7 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 import * as MailComposer from 'expo-mail-composer';
 import { useNavigation } from '@react-navigation/native';
-import {useSharedStates} from '../pages/sharedStates'
+import {useSharedStates} from '../sharedStates'
 
 export default function BildFragen() {
   const navigation = useNavigation();

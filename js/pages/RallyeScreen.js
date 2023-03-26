@@ -1,14 +1,12 @@
 import { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, StyleSheet, Button } from 'react-native';
 import { supabase } from '../../supabase';
-import Wissensfragen from '../questions/Wissensfragen';
-import BildFragen from '../questions/BildFragen';
-import QRCodeFragen from '../questions/QRCodeFragen';
+import Wissensfragen from './questions/Wissensfragen';
+import BildFragen from './questions/BildFragen';
+import QRCodeFragen from './questions/QRCodeFragen';
 import {useSharedStates} from './sharedStates'
 
-export default function RalleyScreen(props) {
-  const navigation = useNavigation();
+export default function RallyeScreen(props) {
   const {fragen, setFragen} = useSharedStates();
   const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
   const {points, setPoints} = useSharedStates();
@@ -75,7 +73,7 @@ export default function RalleyScreen(props) {
   
     content=(
       <View>
-        <Text style={styles.endText}>Die Ralley wurde erforderlich beendet! Eure erreichte Punktzahl: {points}</Text>
+        <Text style={styles.endText}>Die Rallye wurde erforderlich beendet! Eure erreichte Punktzahl: {points}</Text>
         <Text style={styles.tileText}>Ladet gerne euren Gruppennamen und eure Punktzahl hoch, um im Ranking aufgenommen zu werden! Einfach auf 'Hochladen' klicken.</Text>
         <View>
           <Button
