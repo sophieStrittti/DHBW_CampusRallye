@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, Alert, StyleSheet, ScrollView } from 'react-native';
 import {useSharedStates} from '../sharedStates'
 import { supabase } from '../../../supabase';
 
@@ -56,6 +56,7 @@ export default function Wissensfragen () {
   };
   
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Text style={styles.question}>{fragen[aktuelleFrage].frage}</Text>
       <Text style={styles.inputLabel}>Antwort:</Text>
@@ -78,6 +79,7 @@ export default function Wissensfragen () {
         </View>
       ) : null}
     </View>
+    </ScrollView>
   );
 }
 

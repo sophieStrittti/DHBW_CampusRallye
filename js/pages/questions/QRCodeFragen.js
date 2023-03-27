@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, Button, Dimensions } from 'react-native';
+import { StyleSheet, Text, View, Button, Dimensions, ScrollView } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import * as Location from 'expo-location';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
@@ -93,6 +93,7 @@ export default function QRCodeFragen() {
 
   if (!qrscan){
     content = (
+      <ScrollView>
       <View>
         <View style={styles.header}>
           <Text style={styles.title}>{fragen[aktuelleFrage].frage}</Text>
@@ -115,6 +116,7 @@ export default function QRCodeFragen() {
           />
         </View>
       </View>
+      </ScrollView>
     );
   } else if (qrscan) {
     content = (
