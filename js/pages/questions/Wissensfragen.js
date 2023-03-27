@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Button, Alert, StyleSheet, ScrollView } from 'react-native';
 import {useSharedStates} from '../sharedStates'
 import { supabase } from '../../../supabase';
 
