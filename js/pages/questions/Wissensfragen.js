@@ -4,6 +4,7 @@ import {useSharedStates} from '../sharedStates'
 import { supabase } from '../../../supabase';
 
 export default function Wissensfragen () {
+  // import shared States
   const {fragen, setFragen} = useSharedStates();
   const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
   const {points, setPoints} = useSharedStates();

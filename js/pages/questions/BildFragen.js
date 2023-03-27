@@ -9,6 +9,8 @@ import { supabase } from '../../../supabase';
 
 export default function BildFragen() {
   const navigation = useNavigation();
+
+  // import shared States
   const {fragen, setFragen} = useSharedStates();
   const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
   const [selectedImage, setSelectedImage] = useState(null);
@@ -107,6 +109,7 @@ export default function BildFragen() {
         <Button title="Senden" onPress={handleSendEmail} disabled={!selectedImage} style={styles.button} />
       </View>
       <Text style={styles.infoText}>Das aufgenommene Foto soll über den Button "SENDEN" per E-Mail gesendet werden</Text>
+      <Text style={styles.infoText}>Falls das Senden über den Button nicht geht, dann macht die Fotos in eurer Kamera App und schickt die Fotos selsbtständig mit Gruppenname an {mailadress}</Text>
       <View style={styles.buttonContainer}>
         <Button title="Weiter" onPress={handleAnswerSubmit} style={styles.button} />
       </View>

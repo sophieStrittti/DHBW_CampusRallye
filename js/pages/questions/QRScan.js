@@ -12,6 +12,8 @@ export default function QRScan() {
   const [scanned, setScanned] = useState(false);
   const [correctAnswer, setCorrectAnswer] = useState('');
   const {fragen, setFragen} = useSharedStates();
+
+  // import shared States
   const {aktuelleFrage, setAktuelleFrage} = useSharedStates();
   const {qrscan, setQrscan} = useSharedStates();
 
