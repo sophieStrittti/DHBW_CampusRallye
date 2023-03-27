@@ -56,6 +56,7 @@ export default function Wissensfragen () {
   };
   
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Text style={styles.question}>{fragen[aktuelleFrage].frage}</Text>
       <Text style={styles.inputLabel}>Antwort:</Text>
@@ -78,6 +79,7 @@ export default function Wissensfragen () {
         </View>
       ) : null}
     </View>
+    </ScrollView>
   );
 }
 

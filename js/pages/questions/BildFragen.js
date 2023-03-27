@@ -93,6 +93,7 @@ export default function BildFragen() {
   };
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Text style={styles.text}>{fragen[aktuelleFrage].frage}</Text>
       <View style={styles.imageContainer}>
@@ -111,6 +112,7 @@ export default function BildFragen() {
         <Button title="Weiter" onPress={handleAnswerSubmit} style={styles.button} />
       </View>
     </View>
+    </ScrollView>
   );
 }
 
