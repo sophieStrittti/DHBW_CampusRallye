@@ -33,7 +33,6 @@ export default function BildFragen() {
       }
     })();
   }, []);
-  console.log(mailadress)
 
   const handleLaunchCamera = async () => {
     let result = await ImagePicker.launchCameraAsync({
