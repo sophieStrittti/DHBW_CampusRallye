@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Button, Image, Alert, StyleSheet } from 'react-native';
+import { View, Text, Button, Image, Alert, StyleSheet, ScrollView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import * as MediaLibrary from 'expo-media-library';
 import * as MailComposer from 'expo-mail-composer';
@@ -94,6 +94,7 @@ export default function BildFragen() {
   };
 
   return (
+    <ScrollView>
     <View style={styles.container}>
       <Text style={styles.text}>{fragen[aktuelleFrage].frage}</Text>
       <View style={styles.imageContainer}>
@@ -113,6 +114,7 @@ export default function BildFragen() {
         <Button title="Weiter" onPress={handleAnswerSubmit} style={styles.button} />
       </View>
     </View>
+    </ScrollView>
   );
 }
 
